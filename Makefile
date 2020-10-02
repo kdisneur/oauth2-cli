@@ -26,13 +26,13 @@ GO_STATICCHECK_BIN := $(GO_BIN) run ./vendor/honnef.co/go/tools/cmd/staticcheck
 compile:
 	@touch internal/version.go
 
-	GOOS=$(OS) GOARCH=$(ARCH) go build $(BUILD_OPTIONS) \
+	@GOOS=$(OS) GOARCH=$(ARCH) go build $(BUILD_OPTIONS) \
 		-ldflags \
 		"-X github.com/kdisneur/oauth2/internal.versionNumber=$$(if [ "$(GIT_TAG)" = "" ]; then echo "unknown"; else echo "$(GIT_TAG)"; fi) \
-			 -X github.com/kdisneur/oauth2/internal.gitBranch=$(GIT_BRANCH) \
-			 -X github.com/kdisneur/oauth2/internal.gitCommit=$(GIT_COMMIT) \
-			 -X github.com/kdisneur/oauth2/internal.gitState=$(GIT_STATE) \
-			 -X github.com/kdisneur/oauth2/internal.buildDate=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+			 -X github.com/kdisneur/oauth2-cli/internal.gitBranch=$(GIT_BRANCH) \
+			 -X github.com/kdisneur/oauth2-cli/internal.gitCommit=$(GIT_COMMIT) \
+			 -X github.com/kdisneur/oauth2-cli/internal.gitState=$(GIT_STATE) \
+			 -X github.com/kdisneur/oauth2-cli/internal.buildDate=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')" \
 		-o $(BUILD_FOLDER)/$(BINARY_NAME)
 
 	@tar czf $(BUILD_FOLDER)/$(FULL_BINARY_NAME).tgz -C $(BUILD_FOLDER) $(BINARY_NAME)
