@@ -109,6 +109,7 @@ func RunAuthorizationCode(input AuthorizationCodeInput, opts AuthorizationCodeOp
 	body.Set("code", result.Code)
 	body.Set("redirect_uri", input.RedirectURI)
 	body.Set("client_id", input.ClientID)
+	body.Set("client_secret", input.ClientSecret)
 
 	request, err := http.NewRequest("POST", input.TokenURI, strings.NewReader(body.Encode()))
 	if err != nil {
